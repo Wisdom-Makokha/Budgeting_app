@@ -1,0 +1,55 @@
+version: '3.7'
+
+services:
+  budgeting_app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: budgeting_app_image
+    container_name: budgeting_app_container
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - .:/var/www
+      - ./docker/app/php.ini:/usr/local/etc/php/php.ini
+    ports:
+      - 8000:80
+    networks:
+      - budgeting_network
+    depends_on:
+      - database
+  
+  database:
+    image: mysql:8.0
+    container_name: budgeting_database
+    restart: always
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+    networks:
+      - budgeting_network
+    ports:
+      - 3306:3306
+    command: # run command
+      - --collation-server=utf8mb4_0900_ai_ci #allows for sorting and comparing text in a case insensitive manner
+      - --max_connections=4 #sets the maximum connections to 4
+      - --wait_timeout=60 #inactive connections are disconnected after 60 seconds
+      - --sql_mode= # clears the sql mode to a default execution mode 
+    
+
+networks:
+  budgeting_network:
+    driver: bridge
+
+volumes:
+  db_data:
