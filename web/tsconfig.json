@@ -1,0 +1,45 @@
+{
+    "compilerOptions": {
+      /* Basic Options */
+      "target": "ESNext",                          // Specify ECMAScript target version
+      "module": "ESNext",                          // Specify module code generation
+      "lib": ["DOM", "DOM.Iterable", "ESNext"],    // Specify library files to be included
+      "allowJs": true,                             // Allow JavaScript files to be compiled
+      "skipLibCheck": true,                        // Skip type checking of declaration files
+      "strict": true,                              // Enable all strict type-checking options
+      "forceConsistentCasingInFileNames": true,    // Disallow inconsistently-cased references
+
+      /* Module Resolution Options */
+      "moduleResolution": "Node",                 // Use Node.js module resolution
+      "resolveJsonModule": true,                  // Allow importing .json files
+      "isolatedModules": true,                    // Ensure each file can be safely transpiled
+      "esModuleInterop": true,                    // Enable compatibility for CommonJS modules
+
+      /* JSX Options */
+      "jsx": "react-jsx",                         // Use the new JSX transform (React 17+)
+
+      /* Paths and Base URL */
+      "baseUrl": ".",                             // Base directory for non-relative module imports
+      "paths": {                                  // Aliases for modules
+        "@components/*": ["src/components/*"],
+        "@hooks/*": ["src/hooks/*"],
+        "@utils/*": ["src/utils/*"]
+      },
+
+      /* Type Checking Options */
+      "strictNullChecks": true,                   // Ensure strict null checking
+      "noImplicitAny": true,                      // Raise error on expressions with `any` type
+      "noImplicitThis": true,                     // Raise error on `this` with an implicit `any` type
+      "alwaysStrict": true,                       // Parse in strict mode and emit `"use strict"`
+
+      /* Output Options */
+      "outDir": "dist",                           // Redirect output structure to this directory
+      "rootDir": "src",                           // Specify the root directory of input files
+      "declaration": true,                        // Generate .d.ts files
+      "declarationMap": true,                     // Create source maps for .d.ts files
+      "sourceMap": true,                          // Generate corresponding .map files
+      "inlineSources": true                       // Include code with source maps
+    },
+    "include": ["src"],                           // Files or directories to include in the compilation
+    "exclude": ["node_modules", "dist"]           // Files or directories to exclude from the compilation
+  }

@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   budgeting_app:
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile
     image: budgeting_app_image
@@ -18,7 +18,19 @@ services:
       - budgeting_network
     depends_on:
       - database
-  
+
+
+  react-app:
+    build:
+        context: ./web
+    ports:
+        - "5173:5173"
+    volumes:
+        - ./web:/app
+        - /app/node_modules
+    stdin_open: true
+    tty: true
+
   database:
     image: mysql:8.0
     container_name: budgeting_database
@@ -44,8 +56,8 @@ services:
       - --collation-server=utf8mb4_0900_ai_ci #allows for sorting and comparing text in a case insensitive manner
       - --max_connections=4 #sets the maximum connections to 4
       - --wait_timeout=60 #inactive connections are disconnected after 60 seconds
-      - --sql_mode= # clears the sql mode to a default execution mode 
-    
+      - --sql_mode= # clears the sql mode to a default execution mode
+
 
 networks:
   budgeting_network:
