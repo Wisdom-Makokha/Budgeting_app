@@ -1,0 +1,28 @@
+.side-bar{
+    height: 100%;
+    max-width: 180px;
+    padding-left: 30px;
+    padding-right: 30px;
+    background-color: #EFF4FF;
+}
+
+.side-list div{
+    height: 30px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: #767676;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.side-list{
+    margin-top: 70px;
+}
+
+.side-list div:hover{
+    cursor: pointer;
+    color: var(--blue);
+
+}
