@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->string('type')->nullable();
+            $table->unsignedBigInteger('userid');
+            $table->decimal('amount', total: 8, places: 2);
+            $table->dateTime('date')->useCurrent();
+            $table->string('description')->nullable();
             $table->timestamps();
+
+            $table->foreign('userid')->references('id')->on('users');
         });
     }
 

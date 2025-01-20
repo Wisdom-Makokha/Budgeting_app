@@ -13,7 +13,17 @@ return new class extends Migration
     {
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
+            $table->decimal('amount', total: 8, places: 2);
+            $table->string('description')->nullable();
+            $table->date('date')->useCurrent();
+            $table->boolean('periodic')->default(false);
+            $table->integer('period_in_days')->default(0);
+            $table->unsignedBigInteger('categoryid');
+            $table->unsignedBigInteger('userid');
             $table->timestamps();
+
+            $table->foreign('categoryid')->references('id')->on('categories');
+            $table->foreign('userid')->references('id')->on('users');
         });
     }
 

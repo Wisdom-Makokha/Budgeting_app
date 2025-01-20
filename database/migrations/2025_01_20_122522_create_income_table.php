@@ -13,7 +13,17 @@ return new class extends Migration
     {
         Schema::create('income', function (Blueprint $table) {
             $table->id();
+            $table->decimal('amount', total: 8, places: 2);
+            $table->string('source')->nullable();
+            $table->date('date_received')->useCurrent();
+            $table->boolean('periodic')->default(false);
+            $table->integer('period_in_days')->default(0);
+            $table->unsignedBigInteger('userid');
+            $table->unsignedBigInteger('categoryid');
             $table->timestamps();
+
+            $table->foreign('userid')->references('id')->on('users');
+            $table->foreign('categoryid')->references('id')->on('categories');
         });
     }
 
