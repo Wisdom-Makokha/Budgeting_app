@@ -1,8 +1,14 @@
-.dashboard-page{
+.page-wrapper{
     background-color: #F6FAFF;
     display: flex;
+    height: 100vh;
+    overflow-y: hidden;
 }
 
-.dashboard-page .children{
+.page-wrapper .children{
     flex: 1;
+    padding: 15px 25px;
+    height: 100%;
+    overflow-y: scroll;
+
 }

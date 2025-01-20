@@ -8,7 +8,7 @@ interface PageWrapperInterface {
 
 const PageWrapper: React.FC<PageWrapperInterface> = ({ children }) => {
     return (
-        <div className="dashboard-page">
+        <div className="page-wrapper">
             <SideBar />
             <div className="children">{children}</div>
             <CardBar />

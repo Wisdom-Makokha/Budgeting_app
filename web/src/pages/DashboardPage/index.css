@@ -1,0 +1,5 @@
+.dashboard-page .finance-cards{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
