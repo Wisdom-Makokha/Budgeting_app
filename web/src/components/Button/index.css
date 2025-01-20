@@ -1,0 +1,8 @@
+.base-button{
+    color: white;
+    background-color: var(--blue);
+    border-radius: 5px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
