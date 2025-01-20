@@ -3,17 +3,17 @@ version: '3.7'
 services:
   budgeting_app:
     build:
+      target: budget_api
       context: .
       dockerfile: Dockerfile
     image: budgeting_app_image
     container_name: budgeting_app_container
     restart: unless-stopped
-    working_dir: /var/www
+    working_dir: /var/www/html
     volumes:
-      - .:/var/www
-      - ./docker/app/php.ini:/usr/local/etc/php/php.ini
+      - .:/var/www/html
     ports:
-      - 8000:80
+      - "8000:80"
     networks:
       - budgeting_network
     depends_on:
@@ -30,6 +30,10 @@ services:
         - /app/node_modules
     stdin_open: true
     tty: true
+    networks:
+      - budgeting_network
+    depends_on:
+      - budgeting_app
 
   database:
     image: mysql:8.0

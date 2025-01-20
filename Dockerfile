@@ -1,39 +1,37 @@
-# Dockerfile
-FROM php:8.2-fpm-alpine
+# Use PHP with Apache as the base image
+FROM php:8.2-apache as budget_api
 
-#Set working directory
-WORKDIR /var/www
+# Install Additional System Dependencies
+RUN apt-get update && apt-get install -y \
+    libzip-dev \
+    zip
 
-#install dependencies
-RUN apk add --no-cache \
-    bash \
-    mysql-client \
-    openssh \
-    git \
-    curl \
-    libpng-dev \
-    libjpeg-turbo-dev \
-    freetype-dev \
-    oniguruma-dev \
-    libxml2-dev \
-    zip \
-    unzip 
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# clear cache
-RUN docker-php-ext-configure gd \
-        --with-freetype \
-        --with-jpeg \
-        && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+# Enable Apache mod_rewrite for URL rewriting
+RUN a2enmod rewrite
 
-#install composer
-COPY --from=composer:2.0 /usr/bin/composer /usr/bin/composer
+# Install PHP extensions
+RUN docker-php-ext-install pdo_mysql zip
 
-#copy the application code
-COPY . .
+# Configure Apache DocumentRoot to point to Laravel's public directory
+# and update Apache configuration files
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
-#Set permissions
-RUN chown -R www-data:www-data /var/www
+# Copy the application code
+COPY . /var/www/html
 
-#Expose port 9000 and start php-fpm server
-EXPOSE 9000
-CMD ["php-fpm"]
+# Set the working directory
+WORKDIR /var/www/html
+
+# Install composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Install project dependencies
+RUN composer install
+
+# Set permissions
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
