@@ -1,3 +1,4 @@
+import CardBar from "@components/CardBar/Index";
 import FinanceCard from "@components/FinanceCard";
 import SideBar from "@components/SideBar";
 import TextInput from "@components/TextInput";
@@ -10,7 +11,8 @@ export const Route = createFileRoute("/")({
 function RouteComponent() {
     return (
         <div>
-            <SideBar />
+            {/* <SideBar /> */}
+            <CardBar />
         </div>
     );
 }
