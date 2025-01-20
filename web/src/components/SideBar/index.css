@@ -1,7 +1,9 @@
 .side-bar{
     height: 100vh;
     max-width: 180px;
-    padding: 70px 10px;
+    padding-top: 70px;
+    padding-left: 30px;
+    padding-right: 30px;
     background-color: #EFF4FF;
 }
 

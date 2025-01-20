@@ -1,7 +1,3 @@
-import CardBar from "@components/CardBar/Index";
-import FinanceCard from "@components/FinanceCard";
-import SideBar from "@components/SideBar";
-import TextInput from "@components/TextInput";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
@@ -9,10 +5,5 @@ export const Route = createFileRoute("/")({
 });
 
 function RouteComponent() {
-    return (
-        <div>
-            {/* <SideBar /> */}
-            <CardBar />
-        </div>
-    );
+    return <div>hello</div>;
 }

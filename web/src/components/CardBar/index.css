@@ -1,8 +1,13 @@
 .card-bar{
-    max-width: 270px;
+    max-width: 290px;
+    width: 100%;
     padding-top: 8px;
     height: 100vh;
     position: relative;
+    background-color: transparent;
+    border-left-style: solid;
+    border-width: 1px;
+    border-color: var(--border-grey);
 }
 
 .top{
@@ -93,12 +98,13 @@
 
 .bottom{
     gap: 15px;
-    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
 }
 
 .bottom .send-form{
     gap: 10px;
-    width: 100%;
 }
 
 
