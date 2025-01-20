@@ -1,10 +1,14 @@
 import "./index.css";
 
-const TextInput: React.FC<
-    React.DetailedHTMLProps<
+interface TextInputInterface
+    extends React.DetailedHTMLProps<
         React.InputHTMLAttributes<HTMLInputElement>,
         HTMLInputElement
-    >
-> = ({ ...props }) => <input {...props} className="text-input" />;
+    > {
+    classname?: string;
+}
+const TextInput: React.FC<TextInputInterface> = ({ className, ...props }) => (
+    <input {...props} className={`text-input ${className}`} />
+);
 
 export default TextInput;
