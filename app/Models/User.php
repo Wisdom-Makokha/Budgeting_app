@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -44,5 +45,30 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(related: Transactions::class, foreignKey: 'userid', localKey: 'id');
+    }
+
+    public function expenses(): HasMany
+    {
+        return $this->hasMany(related: expenses::class, foreignKey: 'userid', localKey: 'id');
+    }
+
+    public function income(): HasMany
+    {
+        return $this->HasMany(related: income::class, foreignKey: 'userid', localKey: 'id');
+    }
+
+    public function budget(): HasMany
+    {
+        return $this->HasMany(related: budget::class, foreignKey:'userid', localKey:'id');
+    }
+
+    public function budget_categories(): HasMany
+    {
+        return $this->HasMany(related: budget_categories::class, foreignKey:'userid', localKey:'id');
     }
 }
