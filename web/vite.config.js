@@ -1,8 +1,9 @@
 import { defineConfig } from "vite";
+import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
 import react from "@vitejs/plugin-react";
 
 export default defineConfig({
-    plugins: [react()],
+    plugins: [TanStackRouterVite(), react()],
     server: {
         host: true, // Allows the server to be accessible externally
         port: 5173, // Port that Vite runs on
