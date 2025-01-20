@@ -1,0 +1,21 @@
+.text-input{
+    padding: 10px 15px;
+    font-size: 15px;
+    border-radius: 5px;
+    color: var(--blackish);
+    border-width: 1px;
+    outline: none;
+    border-color: var(--border-grey);
+    width: 100%;
+    border-style: solid;
+
+}
+
+.text-input:focus{
+    border-color: var(--blue);
+}
+
+.text-input::placeholder{
+    color: var(--grey);
+
+}

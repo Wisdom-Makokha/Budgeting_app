@@ -1,4 +1,5 @@
 import FinanceCard from "@components/FinanceCard";
+import TextInput from "@components/TextInput";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
@@ -10,6 +11,7 @@ function RouteComponent() {
         <div>
             Hello "/"!
             <FinanceCard fillBackground amount={20000} title="Total Money" />
+            <TextInput type="text" placeholder="hello" />
         </div>
     );
 }
