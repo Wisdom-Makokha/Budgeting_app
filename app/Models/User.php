@@ -48,11 +48,6 @@ class User extends Authenticatable
         ];
     }
 
-    public function transactions(): HasMany
-    {
-        return $this->hasMany(related: Transactions::class, foreignKey: 'userid', localKey: 'id');
-    }
-
     public function expenses(): HasMany
     {
         return $this->hasMany(related: expenses::class, foreignKey: 'userid', localKey: 'id');
