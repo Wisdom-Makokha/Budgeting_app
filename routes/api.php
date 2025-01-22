@@ -59,10 +59,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/addBudget', [BudgetController::class, 'addBudget']);
     Route::put('/editBudget', [BudgetController::class, 'editBudget']);
     Route::delete('/deleteBudget', [BudgetController::class, 'deleteBudget']);
-   
+
     // budget categories
     Route::post('/addBudgetCategory', [BudgetCategoriesController::class, 'addBudgetCategory']);
     Route::put('/editBudgetCategory', [BudgetCategoriesController::class, 'editBudgetCategory']);
     Route::delete('/deleteBudgetCategory', [BudgetCategoriesController::class, 'deleteBudgetCategory']);
-
 });

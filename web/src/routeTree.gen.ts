@@ -10,85 +10,104 @@
 
 // Import Routes
 
-import { Route as rootRoute } from "./routes/__root";
-import { Route as IndexImport } from "./routes/index";
-import { Route as TransactionsIndexImport } from "./routes/transactions/index";
+import { Route as rootRoute } from './routes/__root'
+import { Route as IndexImport } from './routes/index'
+import { Route as TransactionsIndexImport } from './routes/transactions/index'
+import { Route as PlanIndexImport } from './routes/plan/index'
 
 // Create/Update Routes
 
 const IndexRoute = IndexImport.update({
-    id: "/",
-    path: "/",
-    getParentRoute: () => rootRoute,
-} as any);
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const TransactionsIndexRoute = TransactionsIndexImport.update({
-    id: "/transactions/",
-    path: "/transactions/",
-    getParentRoute: () => rootRoute,
-} as any);
+  id: '/transactions/',
+  path: '/transactions/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PlanIndexRoute = PlanIndexImport.update({
+  id: '/plan/',
+  path: '/plan/',
+  getParentRoute: () => rootRoute,
+} as any)
 
 // Populate the FileRoutesByPath interface
 
-declare module "@tanstack/react-router" {
-    interface FileRoutesByPath {
-        "/": {
-            id: "/";
-            path: "/";
-            fullPath: "/";
-            preLoaderRoute: typeof IndexImport;
-            parentRoute: typeof rootRoute;
-        };
-        "/transactions/": {
-            id: "/transactions/";
-            path: "/transactions";
-            fullPath: "/transactions";
-            preLoaderRoute: typeof TransactionsIndexImport;
-            parentRoute: typeof rootRoute;
-        };
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
     }
+    '/plan/': {
+      id: '/plan/'
+      path: '/plan'
+      fullPath: '/plan'
+      preLoaderRoute: typeof PlanIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/transactions/': {
+      id: '/transactions/'
+      path: '/transactions'
+      fullPath: '/transactions'
+      preLoaderRoute: typeof TransactionsIndexImport
+      parentRoute: typeof rootRoute
+    }
+  }
 }
 
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-    "/": typeof IndexRoute;
-    "/transactions": typeof TransactionsIndexRoute;
+  '/': typeof IndexRoute
+  '/plan': typeof PlanIndexRoute
+  '/transactions': typeof TransactionsIndexRoute
 }
 
 export interface FileRoutesByTo {
-    "/": typeof IndexRoute;
-    "/transactions": typeof TransactionsIndexRoute;
+  '/': typeof IndexRoute
+  '/plan': typeof PlanIndexRoute
+  '/transactions': typeof TransactionsIndexRoute
 }
 
 export interface FileRoutesById {
-    __root__: typeof rootRoute;
-    "/": typeof IndexRoute;
-    "/transactions/": typeof TransactionsIndexRoute;
+  __root__: typeof rootRoute
+  '/': typeof IndexRoute
+  '/plan/': typeof PlanIndexRoute
+  '/transactions/': typeof TransactionsIndexRoute
 }
 
 export interface FileRouteTypes {
-    fileRoutesByFullPath: FileRoutesByFullPath;
-    fullPaths: "/" | "/transactions";
-    fileRoutesByTo: FileRoutesByTo;
-    to: "/" | "/transactions";
-    id: "__root__" | "/" | "/transactions/";
-    fileRoutesById: FileRoutesById;
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths: '/' | '/plan' | '/transactions'
+  fileRoutesByTo: FileRoutesByTo
+  to: '/' | '/plan' | '/transactions'
+  id: '__root__' | '/' | '/plan/' | '/transactions/'
+  fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-    IndexRoute: typeof IndexRoute;
-    TransactionsIndexRoute: typeof TransactionsIndexRoute;
+  IndexRoute: typeof IndexRoute
+  PlanIndexRoute: typeof PlanIndexRoute
+  TransactionsIndexRoute: typeof TransactionsIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
-    IndexRoute: IndexRoute,
-    TransactionsIndexRoute: TransactionsIndexRoute,
-};
+  IndexRoute: IndexRoute,
+  PlanIndexRoute: PlanIndexRoute,
+  TransactionsIndexRoute: TransactionsIndexRoute,
+}
 
 export const routeTree = rootRoute
-    ._addFileChildren(rootRouteChildren)
-    ._addFileTypes<FileRouteTypes>();
+  ._addFileChildren(rootRouteChildren)
+  ._addFileTypes<FileRouteTypes>()
 
 /* ROUTE_MANIFEST_START
 {
@@ -97,11 +116,15 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/plan/",
         "/transactions/"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/plan/": {
+      "filePath": "plan/index.tsx"
     },
     "/transactions/": {
       "filePath": "transactions/index.tsx"

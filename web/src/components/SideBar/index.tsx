@@ -29,7 +29,10 @@ const SideBar: React.FC = () => {
                 >
                     <Transaction width="20" height="20" /> Transaction
                 </div>
-                <div className="side-item">
+                <div
+                    className="side-item"
+                    onClick={() => navigateToRoute("/plan")}
+                >
                     <Target width="20" height="20" /> Plan
                 </div>
                 <div className="side-item">
