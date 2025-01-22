@@ -13,7 +13,7 @@ class CategoriesController extends Controller
         $request->validate([
             'name' => 'required|string|unique:categories,name',
             'direction_of_flow' => 'required|boolean',
-            'description' => 'string|null',
+            'description' => 'string',
         ]);
 
         $category = categories::create([
@@ -34,9 +34,9 @@ class CategoriesController extends Controller
     public function editCategory(Request $request)
     {
         $request->validate([
-            'name' => 'string|null',
-            'description' => 'string|null',
-            'direction_of_flow' => 'boolean|null'
+            'name' => 'string',
+            'description' => 'string',
+            'direction_of_flow' => 'boolean'
         ]);
 
         $category = categories::find($request->input('id'));

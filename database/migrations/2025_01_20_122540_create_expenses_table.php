@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->decimal('amount', total: 8, places: 2);
             $table->string('description')->nullable();
-            $table->date('date')->useCurrent();
+            $table->date('date_spent')->useCurrent();
             $table->boolean('periodic')->default(false);
             $table->unsignedInteger('period_in_days')->default(0);
             $table->unsignedBigInteger('categoryid');

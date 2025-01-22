@@ -14,10 +14,10 @@ class IncomeController extends Controller
         if (Auth::check()) {
             $request->validate([
                 "amount" => 'required|decimal:2',
-                'source' => 'string|null',
+                'source' => 'string',
                 'date_received' => 'required|date',
                 'periodic' => 'required|boolean',
-                'period_in_days' => 'integer|null',
+                'period_in_days' => 'integer',
                 'categoryid' => 'required|integer|exists:categories,id'
             ]);
 
@@ -27,7 +27,7 @@ class IncomeController extends Controller
                 'date_received' => $request->date_received,
                 'periodic' => $request->periodic,
                 'period_in_days' => $request->period_in_days,
-                'category_id' => $request->categoryid,
+                'categoryid' => $request->categoryid,
                 'userid' => Auth::user()->id
             ]);
 
@@ -52,12 +52,12 @@ class IncomeController extends Controller
             $request->validate(
                 [
                     'id' => 'required|integer',
-                    'amount' => 'decimal:2|null',
-                    'source' => 'string|null',
-                    'date_received' => 'date|null',
-                    'periodic' => 'boolean|null',
-                    'period_in_days' => 'integer|null',
-                    'category_id' => 'integer|null|exists:categories,id'
+                    'amount' => 'decimal:2',
+                    'source' => 'string',
+                    'date_received' => 'date',
+                    'periodic' => 'boolean',
+                    'period_in_days' => 'integer',
+                    'categoryid' => 'integer|exists:categories,id'
                 ]
             );
             $income = income::find($request->id);
@@ -101,7 +101,7 @@ class IncomeController extends Controller
                     404
                 );
 
-            if (Auth::id() != $income->user_id)
+            if (Auth::id() != $income->userid)
                 return response()->json(
                     ['message' => 'Unauthorized'],
                     403

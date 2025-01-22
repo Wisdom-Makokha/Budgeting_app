@@ -109,8 +109,8 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'prohibits:name|nullable|string|email',
-            'name' => 'prohibits:email|nullable|string',
+            'email' => 'prohibits:name|string|email',
+            'name' => 'prohibits:email|string',
             'password' => 'required|string'
         ]);
 

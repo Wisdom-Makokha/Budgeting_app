@@ -14,10 +14,10 @@ class ExpensesController extends Controller
         if (Auth::check()) {
             $request->validate([
                 "amount" => 'required|decimal:2',
-                'source' => 'string|null',
-                'date_received' => 'required|date',
+                'source' => 'string',
+                'date_spent' => 'date',
                 'periodic' => 'required|boolean',
-                'period_in_days' => 'integer|null',
+                'period_in_days' => 'integer',
                 'categoryid' => 'required|integer|exists:categories,id'
             ]);
 
@@ -25,10 +25,10 @@ class ExpensesController extends Controller
             $expense = expenses::create([
                 'amount' => $request->amount,
                 'source' => $request->source,
-                'date_received' => $request->date_received,
+                'date_spent' => $request->date_spent,
                 'periodic' => $request->periodic,
                 'period_in_days' => $request->period_in_days,
-                'category_id' => $request->categoryid,
+                'categoryid' => $request->categoryid,
                 'userid' => Auth::user()->id
             ]);
 
@@ -49,12 +49,12 @@ class ExpensesController extends Controller
             $request->validate(
                 [
                     'id' => 'required|integer',
-                    'amount' => 'decimal:2|null',
-                    'source' => 'string|null',
-                    'date_received' => 'date|null',
-                    'periodic' => 'boolean|null',
-                    'period_in_days' => 'integer|null',
-                    'category_id' => 'integer|null|exists:categories,id',
+                    'amount' => 'decimal:2',
+                    'source' => 'string',
+                    'date_spent' => 'date',
+                    'periodic' => 'boolean',
+                    'period_in_days' => 'integer',
+                    'categoryid' => 'integer|exists:categories,id',
                 ]
             );
             $expense = expenses::find($request->id);
@@ -86,7 +86,7 @@ class ExpensesController extends Controller
             if (!$expense)
                 return response()->json(['message' => 'Requested resource not found'], 404);
 
-            if (Auth::id() != $expense->user_id)
+            if (Auth::id() != $expense->userid)
                 return response()->json(['message' => 'Unauthorized'], 403);
 
             $expense->delete();
@@ -100,7 +100,7 @@ class ExpensesController extends Controller
     public function getExpense(Request $request)
     {
         $expense = expenses::join('categories', 'expense.categoryid', 'categories.id')
-            ->select('expense.amount', 'expense.source', 'expense.date_received', 'expense.periodic', 'expense.period_in_days', 'categories.name')
+            ->select('expense.amount', 'expense.source', 'expense.date_spent', 'expense.periodic', 'expense.period_in_days', 'categories.name')
             ->where('expense.id', $request->input('id'))
             ->get();
 
@@ -113,7 +113,7 @@ class ExpensesController extends Controller
     public function getAllExpenses()
     {
         $expense = expenses::join('categories', 'expense.categoryid', 'categories.id')
-            ->select('expense.amount', 'expense.source', 'expense.date_received', 'expense.periodic', 'expense.period_in_days', 'categories.name')
+            ->select('expense.amount', 'expense.source', 'expense.date_spent', 'expense.periodic', 'expense.period_in_days', 'categories.name')
             ->get();
 
         if ($expense)

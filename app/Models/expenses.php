@@ -17,7 +17,7 @@ class expenses extends Model
         'categoryid',
         'userid',
         'description',
-        'date',
+        'date_spent',
         'periodic',
         'period_in_days'
     ];
