@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->date('date')->useCurrent();
             $table->boolean('periodic')->default(false);
-            $table->unsignedIntegerr('period_in_days')->default(0);
+            $table->unsignedInteger('period_in_days')->default(0);
             $table->unsignedBigInteger('categoryid');
             $table->unsignedBigInteger('userid');
             $table->timestamps();
