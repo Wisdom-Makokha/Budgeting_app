@@ -99,9 +99,9 @@ class ExpensesController extends Controller
 
     public function getExpense(Request $request)
     {
-        $expense = expenses::join('categories', 'expense.categoryid', 'categories.id')
-            ->select('expense.amount', 'expense.source', 'expense.date_spent', 'expense.periodic', 'expense.period_in_days', 'categories.name')
-            ->where('expense.id', $request->input('id'))
+        $expense = expenses::join('categories', 'expenses.categoryid', 'categories.id')
+            ->select('expenses.amount', 'expenses.source', 'expenses.date_spent', 'expenses.periodic', 'expenses.period_in_days', 'categories.name')
+            ->where('expenses.id', $request->input('id'))
             ->get();
 
         if ($expense)
@@ -112,8 +112,8 @@ class ExpensesController extends Controller
 
     public function getAllExpenses()
     {
-        $expense = expenses::join('categories', 'expense.categoryid', 'categories.id')
-            ->select('expense.amount', 'expense.source', 'expense.date_spent', 'expense.periodic', 'expense.period_in_days', 'categories.name')
+        $expense = expenses::join('categories', 'expenses.categoryid', 'categories.id')
+            ->select('expenses.amount', 'expenses.source', 'expenses.date_spent', 'expenses.periodic', 'expenses.period_in_days', 'categories.name')
             ->get();
 
         if ($expense)

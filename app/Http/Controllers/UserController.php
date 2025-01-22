@@ -161,10 +161,10 @@ class UserController extends Controller
     public function getUserIncome(Request $request)
     {
         if (Auth::check()) {
-            $income = income::join('categories', 'income.categoryid', 'categories.id')
-                ->select('income.amount', 'income.source', 'income.date_received', 'income.periodic', 'income.period_in_days', 'categories.name')
-                ->where('income.userid', Auth::id())
-                ->where('income.id', $request->input('id'))
+            $income = income::join('categories', 'incomes.categoryid', 'categories.id')
+                ->select('incomes.amount', 'incomes.source', 'incomes.date_received', 'incomes.periodic', 'incomes.period_in_days', 'categories.name')
+                ->where('incomes.userid', Auth::id())
+                ->where('incomes.id', $request->input('id'))
                 ->get();
 
             if (!$income)
@@ -187,9 +187,9 @@ class UserController extends Controller
     public function getAllUserIncome()
     {
         if (Auth::check()) {
-            $incomes = income::join('categories', 'income.categoryid', 'categories.id')
-                ->select('income.amount', 'income.source', 'income.date_received', 'income.periodic', 'income.period_in_days', 'categories.name')
-                ->where('income.userid', Auth::id())
+            $incomes = income::join('categories', 'incomes.categoryid', 'categories.id')
+                ->select('incomes.amount', 'incomes.source', 'incomes.date_received', 'incomes.periodic', 'incomes.period_in_days', 'categories.name')
+                ->where('incomes.userid', Auth::id())
                 ->get();
 
             if (!$incomes)
@@ -260,10 +260,10 @@ class UserController extends Controller
     public function getUserBudget(Request $request)
     {
         if (Auth::check()) {
-            $budget = budget::join('users', 'budget.userid', 'users.id')
-                ->select('budget.amount', 'budget.start_date', 'budget.end_date')
-                ->where('budget.userid', Auth::id())
-                ->where('budget.id', $request->input('id'))
+            $budget = budget::join('users', 'budgets.userid', 'users.id')
+                ->select('budgets.amount', 'budgets.start_date', 'budgets.end_date')
+                ->where('budgets.userid', Auth::id())
+                ->where('budgets.id', $request->input('id'))
                 ->get();
 
 
@@ -274,7 +274,7 @@ class UserController extends Controller
                     404
                 );
             else {
-                $budget_categories = budget_categories::join('categories', 'budget_category.categoryid', 'categories.id')
+                $budget_categories = budget_categories::join('categories', 'budget_categories.categoryid', 'categories.id')
                     ->select('budget_categories.amount', 'categories.name')
                     ->where('budget_categories.budgetid', $request->input('id'))
                     ->where('budget_Categories.userid', Auth::id())
@@ -298,9 +298,9 @@ class UserController extends Controller
     public function getAllUserBudgets(Request $request)
     {
         if (Auth::check()) {
-            $budgets = budget::join('users', 'budget.userid', 'users.id')
-                ->select('budget.amount', 'budget.start_date', 'budget.end_date')
-                ->where('budget.userid', Auth::id())
+            $budgets = budget::join('users', 'budgets.userid', 'users.id')
+                ->select('budgets.amount', 'budgets.start_date', 'budgets.end_date')
+                ->where('budgets.userid', Auth::id())
                 ->get();
 
 
@@ -311,9 +311,9 @@ class UserController extends Controller
                     404
                 );
             else {
-                $budget_categories = budget_categories::join('categories', 'budget_category.categoryid', 'categories.id')
+                $budget_categories = budget_categories::join('categories', 'budget_categories.categoryid', 'categories.id')
                     ->select('budget_categories.amount', 'categories.name')
-                    ->where('budget_Categories.userid', Auth::id())
+                    ->where('budget_categories.userid', Auth::id())
                     ->get();
 
                 return response()->json(
@@ -334,7 +334,7 @@ class UserController extends Controller
     public function getUserBudgetCategory(Request $request)
     {
         if (Auth::check()) {
-            $budget_category = budget_categories::join('categories', 'budget_category.categoryid', 'categories.id')
+            $budget_category = budget_categories::join('categories', 'budget_categories.categoryid', 'categories.id')
                 ->select('budget_categories.amount', 'categories.name')
                 ->where('budget_categories.id', $request->input('id'))
                 ->where('budget_Categories.userid', Auth::id())
@@ -361,7 +361,7 @@ class UserController extends Controller
     public function getAllUserBudgetCategories()
     {
         if (Auth::check()) {
-            $budget_category = budget_categories::join('categories', 'budget_category.categoryid', 'categories.id')
+            $budget_category = budget_categories::join('categories', 'budget_categories.categoryid', 'categories.id')
                 ->select('budget_categories.amount', 'categories.name')
                 ->where('budget_Categories.userid', Auth::id())
                 ->get();

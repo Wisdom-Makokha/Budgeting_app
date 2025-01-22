@@ -14,7 +14,7 @@ class BudgetCategoriesController extends Controller
         if (Auth::check()) {
             $request->validate([
                 'amount' => 'required|decimal:2',
-                'budgetid' => 'required|exists:budget,id',
+                'budgetid' => 'required|exists:budgets,id',
                 'categoryid' => 'required|exists:categories,id',
             ]);
 
@@ -45,7 +45,7 @@ class BudgetCategoriesController extends Controller
             $request->validate([
                 'id' => 'required|integer',
                 'amount' => 'decimal:2',
-                'budgetid' => 'exists:budget,id',
+                'budgetid' => 'exists:budgets,id',
                 'categoryid' => 'exists:categories,id',
             ]);
 
@@ -116,7 +116,7 @@ class BudgetCategoriesController extends Controller
 
     public function getBudgetCategory(Request $request)
     {
-        $budget_category = budget_categories::join('categories', 'budget_category.categoryid', 'categories.id')
+        $budget_category = budget_categories::join('categories', 'budget_categories.categoryid', 'categories.id')
             ->select('budget_categories.amount', 'categories.name')
             ->where('budget_categories.id', $request->input('id'))
             ->get();
@@ -138,7 +138,7 @@ class BudgetCategoriesController extends Controller
 
     public function getAllBudgetCategories()
     {
-        $budget_categories = budget_categories::join('categories', 'budget_category.categoryid', 'categories.id')
+        $budget_categories = budget_categories::join('categories', 'budget_categories.categoryid', 'categories.id')
             ->select('budget_categories.amount', 'categories.name')
             ->get();
 

@@ -123,9 +123,9 @@ class IncomeController extends Controller
 
     public function getIncome(Request $request)
     {
-        $income = income::join('categories', 'income.categoryid', 'categories.id')
-            ->select('income.amount', 'income.source', 'income.date_received', 'income.periodic', 'income.period_in_days', 'categories.name')
-            ->where('income.id', $request->input('id'))
+        $income = income::join('categories', 'incomes.categoryid', 'categories.id')
+            ->select('incomes.amount', 'incomes.source', 'incomes.date_received', 'incomes.periodic', 'incomes.period_in_days', 'categories.name')
+            ->where('incomes.id', $request->input('id'))
             ->get();
 
         if ($income)
@@ -142,8 +142,8 @@ class IncomeController extends Controller
 
     public function getAllIncome()
     {
-        $income = income::join('categories', 'income.categoryid', 'categories.id')
-            ->select('income.amount', 'income.source', 'income.date_received', 'income.periodic', 'income.period_in_days', 'categories.name')
+        $income = income::join('categories', 'incomes.categoryid', 'categories.id')
+            ->select('incomes.amount', 'incomes.source', 'incomes.date_received', 'incomes.periodic', 'incomes.period_in_days', 'categories.name')
             ->get();
 
         if (count($income) > 0)
