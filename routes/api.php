@@ -24,8 +24,6 @@ Route::get('/getAllBudgets', [BudgetController::class, 'getAllBudgets']);
 Route::get('/getBudgetCategory', [BudgetCategoriesController::class, 'getBudgetCategory']);
 Route::get('/getAllBudgetCategories', [BudgetCategoriesController::class, 'getAllBudgetCategories']);
 
-
-
 Route::group(['middleware' => ['auth:sanctum']], function () {
     // user routes
     Route::put('/updateUser', [UserController::class, 'updateUser']);

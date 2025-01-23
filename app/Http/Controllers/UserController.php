@@ -210,7 +210,7 @@ class UserController extends Controller
     {
         if (Auth::check()) {
             $expense = expenses::join('categories', 'expenses.categoryid', 'categories.id')
-                ->select('expenses.amount', 'expenses.source', 'expenses.date_received', 'expenses.periodic', 'expenses.period_in_days', 'categories.name')
+                ->select('expenses.amount', 'expenses.date_received', 'expenses.periodic', 'expenses.period_in_days', 'categories.name')
                 ->where('expenses.userid', Auth::id())
                 ->where('expenses.id', $request->input('id'))
                 ->get();
@@ -236,7 +236,7 @@ class UserController extends Controller
     {
         if (Auth::check()) {
             $expenses = expenses::join('categories', 'expenses.categoryid', 'categories.id')
-                ->select('expenses.amount', 'expenses.source', 'expenses.date_received', 'expenses.periodic', 'expenses.period_in_days', 'categories.name')
+                ->select('expenses.amount', 'expenses.date_received', 'expenses.periodic', 'expenses.period_in_days', 'categories.name')
                 ->where('expenses.userid', Auth::id())
                 ->get();
 
