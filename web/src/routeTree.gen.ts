@@ -12,12 +12,40 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
+import { Route as TransactionsIndexImport } from './routes/transactions/index'
+import { Route as PlanIndexImport } from './routes/plan/index'
+import { Route as TransactionsReportIndexImport } from './routes/transactions/report/index'
+import { Route as PlanCreateIndexImport } from './routes/plan/create/index'
 
 // Create/Update Routes
 
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const TransactionsIndexRoute = TransactionsIndexImport.update({
+  id: '/transactions/',
+  path: '/transactions/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PlanIndexRoute = PlanIndexImport.update({
+  id: '/plan/',
+  path: '/plan/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const TransactionsReportIndexRoute = TransactionsReportIndexImport.update({
+  id: '/transactions/report/',
+  path: '/transactions/report/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PlanCreateIndexRoute = PlanCreateIndexImport.update({
+  id: '/plan/create/',
+  path: '/plan/create/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -32,6 +60,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/plan/': {
+      id: '/plan/'
+      path: '/plan'
+      fullPath: '/plan'
+      preLoaderRoute: typeof PlanIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/transactions/': {
+      id: '/transactions/'
+      path: '/transactions'
+      fullPath: '/transactions'
+      preLoaderRoute: typeof TransactionsIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/plan/create/': {
+      id: '/plan/create/'
+      path: '/plan/create'
+      fullPath: '/plan/create'
+      preLoaderRoute: typeof PlanCreateIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/transactions/report/': {
+      id: '/transactions/report/'
+      path: '/transactions/report'
+      fullPath: '/transactions/report'
+      preLoaderRoute: typeof TransactionsReportIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -39,32 +95,63 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/plan': typeof PlanIndexRoute
+  '/transactions': typeof TransactionsIndexRoute
+  '/plan/create': typeof PlanCreateIndexRoute
+  '/transactions/report': typeof TransactionsReportIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/plan': typeof PlanIndexRoute
+  '/transactions': typeof TransactionsIndexRoute
+  '/plan/create': typeof PlanCreateIndexRoute
+  '/transactions/report': typeof TransactionsReportIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/plan/': typeof PlanIndexRoute
+  '/transactions/': typeof TransactionsIndexRoute
+  '/plan/create/': typeof PlanCreateIndexRoute
+  '/transactions/report/': typeof TransactionsReportIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/plan'
+    | '/transactions'
+    | '/plan/create'
+    | '/transactions/report'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/plan' | '/transactions' | '/plan/create' | '/transactions/report'
+  id:
+    | '__root__'
+    | '/'
+    | '/plan/'
+    | '/transactions/'
+    | '/plan/create/'
+    | '/transactions/report/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PlanIndexRoute: typeof PlanIndexRoute
+  TransactionsIndexRoute: typeof TransactionsIndexRoute
+  PlanCreateIndexRoute: typeof PlanCreateIndexRoute
+  TransactionsReportIndexRoute: typeof TransactionsReportIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PlanIndexRoute: PlanIndexRoute,
+  TransactionsIndexRoute: TransactionsIndexRoute,
+  PlanCreateIndexRoute: PlanCreateIndexRoute,
+  TransactionsReportIndexRoute: TransactionsReportIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -77,11 +164,27 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/"
+        "/",
+        "/plan/",
+        "/transactions/",
+        "/plan/create/",
+        "/transactions/report/"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/plan/": {
+      "filePath": "plan/index.tsx"
+    },
+    "/transactions/": {
+      "filePath": "transactions/index.tsx"
+    },
+    "/plan/create/": {
+      "filePath": "plan/create/index.tsx"
+    },
+    "/transactions/report/": {
+      "filePath": "transactions/report/index.tsx"
     }
   }
 }

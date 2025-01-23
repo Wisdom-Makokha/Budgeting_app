@@ -1,6 +1,15 @@
+import { useRouter } from "@tanstack/react-router";
 import "./index.css";
 
 const TransactionHistory: React.FC = () => {
+    const router = useRouter();
+
+    const navigateToRoute = (route: string) => {
+        router.navigate({
+            to: route,
+        });
+    };
+
     const transactions = [
         {
             id: "#7890328",
@@ -74,6 +83,102 @@ const TransactionHistory: React.FC = () => {
             date: "14 Jan 2:30pm",
             type: "positive",
         },
+        {
+            id: "#2980298",
+            name: "Upwork",
+            logo: "upwork-logo.png",
+            amount: "+Rp 50,000",
+            date: "14 Jan 2:30pm",
+            type: "positive",
+        },
+        {
+            id: "#7890328",
+            name: "Spotify",
+            logo: "spotify-logo.png",
+            amount: "-Rp 13,000",
+            date: "16 Jan 2:30pm",
+            type: "negative", // Use for styling
+        },
+        {
+            id: "#3948509",
+            name: "Starbucks",
+            logo: "starbucks-logo.png",
+            amount: "-Rp 24,000",
+            date: "15 Jan 3:30pm",
+            type: "negative",
+        },
+        {
+            id: "#2980298",
+            name: "Upwork",
+            logo: "upwork-logo.png",
+            amount: "+Rp 50,000",
+            date: "14 Jan 2:30pm",
+            type: "positive",
+        },
+        {
+            id: "#2980298",
+            name: "Upwork",
+            logo: "upwork-logo.png",
+            amount: "+Rp 50,000",
+            date: "14 Jan 2:30pm",
+            type: "positive",
+        },
+        {
+            id: "#7890328",
+            name: "Spotify",
+            logo: "spotify-logo.png",
+            amount: "-Rp 13,000",
+            date: "16 Jan 2:30pm",
+            type: "negative", // Use for styling
+        },
+        {
+            id: "#3948509",
+            name: "Starbucks",
+            logo: "starbucks-logo.png",
+            amount: "-Rp 24,000",
+            date: "15 Jan 3:30pm",
+            type: "negative",
+        },
+        {
+            id: "#2980298",
+            name: "Upwork",
+            logo: "upwork-logo.png",
+            amount: "+Rp 50,000",
+            date: "14 Jan 2:30pm",
+            type: "positive",
+        },
+        {
+            id: "#2980298",
+            name: "Upwork",
+            logo: "upwork-logo.png",
+            amount: "+Rp 50,000",
+            date: "14 Jan 2:30pm",
+            type: "positive",
+        },
+        {
+            id: "#7890328",
+            name: "Spotify",
+            logo: "spotify-logo.png",
+            amount: "-Rp 13,000",
+            date: "16 Jan 2:30pm",
+            type: "negative", // Use for styling
+        },
+        {
+            id: "#3948509",
+            name: "Starbucks",
+            logo: "starbucks-logo.png",
+            amount: "-Rp 24,000",
+            date: "15 Jan 3:30pm",
+            type: "negative",
+        },
+        {
+            id: "#2980298",
+            name: "Upwork",
+            logo: "upwork-logo.png",
+            amount: "+Rp 50,000",
+            date: "14 Jan 2:30pm",
+            type: "positive",
+        },
     ];
 
     return (
@@ -81,11 +186,11 @@ const TransactionHistory: React.FC = () => {
             <div className="header">
                 <h2>Transaction History</h2>
                 <div className="buttons">
-                    <button className="btn btn-primary">
+                    <button
+                        onClick={() => navigateToRoute("/transactions/report")}
+                        className="btn btn-primary"
+                    >
                         <i className="icon-calendar"></i> View Report
-                    </button>
-                    <button className="btn btn-primary">
-                        <i className="icon-filter"></i> View Report
                     </button>
                 </div>
             </div>
