@@ -2,10 +2,15 @@ import { useState } from "react";
 import "./index.css";
 import Tick from "src/assets/icons/Tick";
 import TextInput from "@components/TextInput";
+import User from "src/api/User";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 const PlanPage: React.FC = () => {
     const [currentStep, setCurrentStep] = useState(1); // Step tracker
     const [budgetAmount, setBudgetAmount] = useState(6000); // Budget amount
+
+    const UserApi = User;
+
     const [categories, setCategories] = useState([
         { name: "General", amount: 1000 },
         { name: "Transportation", amount: 1000 },
@@ -24,6 +29,84 @@ const PlanPage: React.FC = () => {
 
     const totalUsed = categories.reduce((sum, cat) => sum + cat.amount, 0);
     const amountLeft = budgetAmount - totalUsed;
+
+    const queryClient = useQueryClient();
+
+    const {
+        data: categoriess,
+        error: categoriesError,
+        isLoading: isCategoriesLoading,
+    } = useQuery({
+        queryKey: ["categories"],
+        queryFn: () => UserApi.getAllCategories().then((res) => res.categories),
+    });
+
+    const addCategoryMutation = useMutation({
+        mutationFn: (newCategory: {
+            name: string;
+            direction_of_flow: boolean;
+            description?: string;
+        }) => UserApi.addCategory(newCategory),
+        onSuccess: () => {
+            console.log("Category added successfully");
+        },
+        onError: (error) => {
+            console.error("Error adding category:", error);
+        },
+    });
+
+    const createBudgetMutation = useMutation({
+        mutationFn: (budgetData: {
+            amount: number;
+            start_date: string;
+            end_date: string;
+        }) => UserApi.addBudget(budgetData),
+        onSuccess: () => {
+            console.log("Budget created successfully");
+        },
+        onError: (error) => {
+            console.error("Error creating budget:", error);
+        },
+    });
+
+    const {
+        data: budgets,
+        error: budgetsError,
+        isLoading: isBudgetsLoading,
+    } = useQuery({
+        queryKey: ["budgets"],
+        queryFn: () => UserApi.getAllBudgets().then((res) => res.budgets),
+    });
+
+    const editBudgetMutation = useMutation({
+        mutationFn: ({
+            id,
+            budgetData,
+        }: {
+            id: number;
+            budgetData: {
+                amount: number;
+                start_date: string;
+                end_date: string;
+            };
+        }) => UserApi.editBudget(id, budgetData),
+        onSuccess: () => {
+            console.log("Budget updated successfully");
+        },
+        onError: (error) => {
+            console.error("Error updating budget:", error);
+        },
+    });
+
+    const deleteBudgetMutation = useMutation({
+        mutationFn: (id: number) => UserApi.deleteBudget(id),
+        onSuccess: () => {
+            console.log("Budget deleted successfully");
+        },
+        onError: (error) => {
+            console.error("Error deleting budget:", error);
+        },
+    });
 
     return (
         <div className="create-budget-flow">
