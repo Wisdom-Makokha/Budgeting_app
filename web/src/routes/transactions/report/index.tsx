@@ -1,11 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import PlanIndex from "src/pages/PlanIndex";
-import PlanPage from "src/pages/PlanPage";
 
-export const Route = createFileRoute("/plan/")({
+export const Route = createFileRoute("/transactions/report/")({
     component: RouteComponent,
 });
 
 function RouteComponent() {
-    return <PlanPage />;
+    return <PlanIndex />;
 }

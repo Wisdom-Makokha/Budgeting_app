@@ -14,6 +14,8 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as TransactionsIndexImport } from './routes/transactions/index'
 import { Route as PlanIndexImport } from './routes/plan/index'
+import { Route as TransactionsReportIndexImport } from './routes/transactions/report/index'
+import { Route as PlanCreateIndexImport } from './routes/plan/create/index'
 
 // Create/Update Routes
 
@@ -32,6 +34,18 @@ const TransactionsIndexRoute = TransactionsIndexImport.update({
 const PlanIndexRoute = PlanIndexImport.update({
   id: '/plan/',
   path: '/plan/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const TransactionsReportIndexRoute = TransactionsReportIndexImport.update({
+  id: '/transactions/report/',
+  path: '/transactions/report/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PlanCreateIndexRoute = PlanCreateIndexImport.update({
+  id: '/plan/create/',
+  path: '/plan/create/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -60,6 +74,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TransactionsIndexImport
       parentRoute: typeof rootRoute
     }
+    '/plan/create/': {
+      id: '/plan/create/'
+      path: '/plan/create'
+      fullPath: '/plan/create'
+      preLoaderRoute: typeof PlanCreateIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/transactions/report/': {
+      id: '/transactions/report/'
+      path: '/transactions/report'
+      fullPath: '/transactions/report'
+      preLoaderRoute: typeof TransactionsReportIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -69,12 +97,16 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/plan': typeof PlanIndexRoute
   '/transactions': typeof TransactionsIndexRoute
+  '/plan/create': typeof PlanCreateIndexRoute
+  '/transactions/report': typeof TransactionsReportIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/plan': typeof PlanIndexRoute
   '/transactions': typeof TransactionsIndexRoute
+  '/plan/create': typeof PlanCreateIndexRoute
+  '/transactions/report': typeof TransactionsReportIndexRoute
 }
 
 export interface FileRoutesById {
@@ -82,14 +114,27 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/plan/': typeof PlanIndexRoute
   '/transactions/': typeof TransactionsIndexRoute
+  '/plan/create/': typeof PlanCreateIndexRoute
+  '/transactions/report/': typeof TransactionsReportIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/plan' | '/transactions'
+  fullPaths:
+    | '/'
+    | '/plan'
+    | '/transactions'
+    | '/plan/create'
+    | '/transactions/report'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/plan' | '/transactions'
-  id: '__root__' | '/' | '/plan/' | '/transactions/'
+  to: '/' | '/plan' | '/transactions' | '/plan/create' | '/transactions/report'
+  id:
+    | '__root__'
+    | '/'
+    | '/plan/'
+    | '/transactions/'
+    | '/plan/create/'
+    | '/transactions/report/'
   fileRoutesById: FileRoutesById
 }
 
@@ -97,12 +142,16 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PlanIndexRoute: typeof PlanIndexRoute
   TransactionsIndexRoute: typeof TransactionsIndexRoute
+  PlanCreateIndexRoute: typeof PlanCreateIndexRoute
+  TransactionsReportIndexRoute: typeof TransactionsReportIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PlanIndexRoute: PlanIndexRoute,
   TransactionsIndexRoute: TransactionsIndexRoute,
+  PlanCreateIndexRoute: PlanCreateIndexRoute,
+  TransactionsReportIndexRoute: TransactionsReportIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -117,7 +166,9 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/plan/",
-        "/transactions/"
+        "/transactions/",
+        "/plan/create/",
+        "/transactions/report/"
       ]
     },
     "/": {
@@ -128,6 +179,12 @@ export const routeTree = rootRoute
     },
     "/transactions/": {
       "filePath": "transactions/index.tsx"
+    },
+    "/plan/create/": {
+      "filePath": "plan/create/index.tsx"
+    },
+    "/transactions/report/": {
+      "filePath": "transactions/report/index.tsx"
     }
   }
 }

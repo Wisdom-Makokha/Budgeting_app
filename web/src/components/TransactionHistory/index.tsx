@@ -1,6 +1,15 @@
+import { useRouter } from "@tanstack/react-router";
 import "./index.css";
 
 const TransactionHistory: React.FC = () => {
+    const router = useRouter();
+
+    const navigateToRoute = (route: string) => {
+        router.navigate({
+            to: route,
+        });
+    };
+
     const transactions = [
         {
             id: "#7890328",
@@ -177,11 +186,11 @@ const TransactionHistory: React.FC = () => {
             <div className="header">
                 <h2>Transaction History</h2>
                 <div className="buttons">
-                    <button className="btn btn-primary">
+                    <button
+                        onClick={() => navigateToRoute("/transactions/report")}
+                        className="btn btn-primary"
+                    >
                         <i className="icon-calendar"></i> View Report
-                    </button>
-                    <button className="btn btn-primary">
-                        <i className="icon-filter"></i> View Report
                     </button>
                 </div>
             </div>

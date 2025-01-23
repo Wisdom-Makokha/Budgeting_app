@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./index.css";
 import Tick from "src/assets/icons/Tick";
+import TextInput from "@components/TextInput";
 
 const PlanPage: React.FC = () => {
     const [currentStep, setCurrentStep] = useState(1); // Step tracker
@@ -80,6 +81,11 @@ const CreateBudgetStep: React.FC<CreateBudgetStepProps> = ({
             <div className="budget-amount">
                 <h3>${budgetAmount.toLocaleString()}</h3>
                 <p>Set budget amount</p>
+                <TextInput
+                    placeholder="enter budget"
+                    type="number"
+                    onChange={(e) => setBudgetAmount(parseInt(e.target.value))}
+                />
                 <div className="amount-options">
                     {[100, 200, 500, 1000].map((amount) => (
                         <button

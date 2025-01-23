@@ -20,7 +20,7 @@ const SideBar: React.FC = () => {
         <div className="side-bar">
             <div className="side-list flex-column">
                 <div className="logo"></div>
-                <div className="side-item">
+                <div className="side-item" onClick={() => navigateToRoute("/")}>
                     <Dashboard width="20" height="20" /> Dashboard
                 </div>
                 <div

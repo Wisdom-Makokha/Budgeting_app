@@ -1,0 +1,142 @@
+/* General styles */
+.spending-insight {
+    text-align: center;
+    font-family: "DM Sans", sans-serif;
+    color: #333;
+}
+
+.budget-overview {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+/* Text styling */
+.monthly-budget-label {
+    font-size: 14px;
+    color: #888;
+}
+
+.budget-amount {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.left-to-spend {
+    font-size: 14px;
+    color: #666;
+}
+
+.left-to-spend span {
+    color: #6200ea;
+    font-weight: bold;
+}
+
+/* Circular progress styles */
+.circle-container {
+    width: 120px;
+    height: 120px;
+    margin: 20px auto;
+    position: relative;
+}
+
+.circle-progress {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: conic-gradient(
+        #6200ea var(--percentage),
+        rgba(98, 0, 234, 0.1) var(--percentage)
+    );
+    position: relative;
+}
+
+.circle-inner {
+    width: 90px;
+    height: 90px;
+    background: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.spent-amount {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* General Styles */
+.budget-category-list {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 800px;
+    font-family: "DM Sans", sans-serif;
+    color: #333;
+}
+
+/* Category Item Styles */
+.category-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #f2f2f2;
+}
+
+.category-item:last-child {
+    border-bottom: none;
+}
+
+.category-info {
+    display: flex;
+    align-items: center;
+}
+
+.category-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.category-info h4 {
+    font-size: 16px;
+    margin: 0;
+    color: #333;
+}
+
+.category-info p {
+    font-size: 12px;
+    margin: 5px 0 0;
+    color: #888;
+}
+
+/* Values (Spent / Budgeted) */
+.category-values {
+    text-align: right;
+}
+
+.category-values .spent {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.category-values .budgeted {
+    font-size: 12px;
+    color: #888;
+}
