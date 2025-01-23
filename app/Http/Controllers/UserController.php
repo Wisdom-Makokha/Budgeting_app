@@ -277,7 +277,7 @@ class UserController extends Controller
                 $budget_categories = budget_categories::join('categories', 'budget_categories.categoryid', 'categories.id')
                     ->select('budget_categories.amount', 'categories.name')
                     ->where('budget_categories.budgetid', $request->input('id'))
-                    ->where('budget_Categories.userid', Auth::id())
+                    ->where('budget_categories.userid', Auth::id())
                     ->get();
 
                 return response()->json(
